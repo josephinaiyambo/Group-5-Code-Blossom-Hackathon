@@ -1,17 +1,22 @@
-import NavBar from "./components/navBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
+import AddProduct from "./pages/AddProduct";
+import AddNeed from "./pages/AddNeed";
+import Matches from "./pages/Matches";
 
 function App() {
   return (
-    <>
-      <Router>
-        <NavBar />
+    <BrowserRouter>
+      <NavBar />
 
-        <Routes>
-          <Route path="/" element={<div>Home</div>} />
-        </Routes>
-      </Router>
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sell" element={<AddProduct />} />
+        <Route path="/buy" element={<AddNeed />} />
+        <Route path="/matches" element={<Matches />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
