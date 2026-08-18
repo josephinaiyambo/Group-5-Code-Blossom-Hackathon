@@ -1,11 +1,12 @@
 const express = require('express');
 const { initTables } = require('./db');
-
+const cors = require("cors");
 const buyersRouter = require('./buyers');
 const demandsRouter = require('./demands');
 const transportRouter = require('./transport');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use('/buyers', buyersRouter);
