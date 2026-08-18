@@ -1,9 +1,9 @@
 const express = require('express');
 const { initTables } = require('./db');
 
-const buyersRouter = require('./routes/buyers');
-const demandsRouter = require('./routes/demands');
-const transportRouter = require('./routes/transport');
+const buyersRouter = require('./buyers');
+const demandsRouter = require('./demands');
+const transportRouter = require('./transport');
 
 const app = express();
 app.use(express.json());

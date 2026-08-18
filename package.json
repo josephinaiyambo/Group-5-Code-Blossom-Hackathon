@@ -1,0 +1,27 @@
+{
+  "name": "group-5-code-blossom-hackathon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "buyers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephinaiyambo/Group-5-Code-Blossom-Hackathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephinaiyambo/Group-5-Code-Blossom-Hackathon/issues"
+  },
+  "homepage": "https://github.com/josephinaiyambo/Group-5-Code-Blossom-Hackathon#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.23.3"
+  }
+}
