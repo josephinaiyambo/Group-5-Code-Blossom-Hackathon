@@ -6,6 +6,7 @@ interface Product {
   quantity: string;
   price: string;
   location: string;
+  image: string;
 }
 
 function SellerDashboard() {
@@ -16,8 +17,30 @@ function SellerDashboard() {
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
 
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState("");
+
+  const handleImageChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    setImageFile(file);
+
+    const previewUrl = URL.createObjectURL(file);
+
+    setImagePreview(previewUrl);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!imageFile) {
+      alert("Please add a product image.");
+      return;
+    }
 
     const newProduct: Product = {
       id: Date.now(),
@@ -25,6 +48,7 @@ function SellerDashboard() {
       quantity,
       price,
       location,
+      image: imagePreview,
     };
 
     setProducts([...products, newProduct]);
@@ -33,13 +57,14 @@ function SellerDashboard() {
     setQuantity("");
     setPrice("");
     setLocation("");
+    setImageFile(null);
+    setImagePreview("");
   };
 
   return (
     <main className="dashboard-page">
 
       <div className="dashboard-heading">
-
         <div>
           <p>SELLER DASHBOARD</p>
 
@@ -49,9 +74,7 @@ function SellerDashboard() {
             Add produce and make it available to buyers across Namibia.
           </span>
         </div>
-
       </div>
-
 
       <div className="seller-layout">
 
@@ -61,7 +84,36 @@ function SellerDashboard() {
 
           <form onSubmit={handleSubmit}>
 
+            {/* PRODUCT IMAGE */}
+
             <div className="form-group">
+
+              <label>Product Image</label>
+
+              <input
+                type="file"
+                accept="image/png, image/jpeg, image/webp"
+                onChange={handleImageChange}
+              />
+
+            </div>
+
+            {imagePreview && (
+              <div className="image-preview">
+
+                <img
+                  src={imagePreview}
+                  alt="Product preview"
+                />
+
+              </div>
+            )}
+
+
+            {/* PRODUCT NAME */}
+
+            <div className="form-group">
+
               <label>Produce Name</label>
 
               <input
@@ -71,10 +123,14 @@ function SellerDashboard() {
                 onChange={(e) => setName(e.target.value)}
                 required
               />
+
             </div>
 
 
+            {/* QUANTITY */}
+
             <div className="form-group">
+
               <label>Quantity Available</label>
 
               <input
@@ -84,10 +140,14 @@ function SellerDashboard() {
                 onChange={(e) => setQuantity(e.target.value)}
                 required
               />
+
             </div>
 
 
+            {/* PRICE */}
+
             <div className="form-group">
+
               <label>Price</label>
 
               <input
@@ -97,10 +157,14 @@ function SellerDashboard() {
                 onChange={(e) => setPrice(e.target.value)}
                 required
               />
+
             </div>
 
 
+            {/* LOCATION */}
+
             <div className="form-group">
+
               <label>Location</label>
 
               <input
@@ -110,10 +174,14 @@ function SellerDashboard() {
                 onChange={(e) => setLocation(e.target.value)}
                 required
               />
+
             </div>
 
 
-            <button className="login-submit" type="submit">
+            <button
+              className="login-submit"
+              type="submit"
+            >
               Add Produce
             </button>
 
@@ -122,6 +190,8 @@ function SellerDashboard() {
         </section>
 
 
+        {/* SELLER LISTINGS */}
+
         <section className="seller-products">
 
           <h2>Your Listings</h2>
@@ -129,6 +199,7 @@ function SellerDashboard() {
           {products.length === 0 ? (
 
             <div className="empty-products">
+
               <span>🌱</span>
 
               <h3>No produce listed yet</h3>
@@ -136,16 +207,29 @@ function SellerDashboard() {
               <p>
                 Add your first product using the form.
               </p>
+
             </div>
 
           ) : (
 
             products.map((product) => (
 
-              <div className="seller-product-card" key={product.id}>
+              <div
+                className="seller-product-card"
+                key={product.id}
+              >
 
-                <div>
-                  <h3>{product.name}</h3>
+                <img
+                  className="seller-product-image"
+                  src={product.image}
+                  alt={product.name}
+                />
+
+                <div className="seller-product-info">
+
+                  <h3>
+                    {product.name}
+                  </h3>
 
                   <p>
                     {product.quantity} available
@@ -154,6 +238,7 @@ function SellerDashboard() {
                   <span>
                     {product.location}
                   </span>
+
                 </div>
 
                 <strong>

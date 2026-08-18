@@ -165,7 +165,7 @@ function Home() {
       <footer>
 
         <div className="footer-column">
-          <h3>Farm2You</h3>
+          <h3>MARKET ACCESS</h3>
 
           <p>
             Connecting Namibian farmers and buyers
@@ -184,7 +184,7 @@ function Home() {
         <div className="footer-column">
           <h3>Contact</h3>
           <p>Namibia</p>
-          <p>Farm2You Marketplace</p>
+          <p>MARKET ACCESS Marketplace</p>
         </div>
 
       </footer>

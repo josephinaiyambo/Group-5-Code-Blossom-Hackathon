@@ -1,3 +1,8 @@
+import tomatoes from "../assets/images/tomatoes.jpg";
+import potatoes from "../assets/images/potatoes.jpg";
+import spinach from "../assets/images/spinach.jpg";
+import carrots from "../assets/images/carrots.jpg";
+
 const products = [
   {
     id: 1,
@@ -6,6 +11,8 @@ const products = [
     location: "Windhoek",
     price: 25,
     amount: "120 kg",
+    unit: "kg",
+    image: tomatoes,
   },
   {
     id: 2,
@@ -14,6 +21,8 @@ const products = [
     location: "Okahandja",
     price: 18,
     amount: "300 kg",
+    unit: "kg",
+    image: potatoes,
   },
   {
     id: 3,
@@ -22,6 +31,8 @@ const products = [
     location: "Oshakati",
     price: 12,
     amount: "80 bunches",
+    unit: "bunch",
+    image: spinach,
   },
   {
     id: 4,
@@ -30,6 +41,8 @@ const products = [
     location: "Otjiwarongo",
     price: 22,
     amount: "150 kg",
+    unit: "kg",
+    image: carrots,
   },
 ];
 
@@ -39,7 +52,8 @@ function BuyerMarketPlace() {
 
       <div className="dashboard-heading">
         <div>
-          <p>FARM2YOU MARKETPLACE</p>
+          <p>MARKET ACCESS MARKETPLACE</p>
+
           <h1>Fresh Produce Near You</h1>
 
           <span>
@@ -49,6 +63,7 @@ function BuyerMarketPlace() {
       </div>
 
       <div className="marketplace-tools">
+
         <input
           type="text"
           placeholder="Search tomatoes, potatoes, spinach..."
@@ -61,15 +76,25 @@ function BuyerMarketPlace() {
           <option>Grains</option>
           <option>Livestock Products</option>
         </select>
+
       </div>
 
       <div className="marketplace-grid">
 
         {products.map((product) => (
-          <div className="marketplace-card" key={product.id}>
+
+          <div
+            className="marketplace-card"
+            key={product.id}
+          >
 
             <div className="marketplace-image-placeholder">
-              🌱
+
+              <img
+                src={product.image}
+                alt={product.name}
+              />
+
             </div>
 
             <div className="marketplace-card-content">
@@ -78,13 +103,24 @@ function BuyerMarketPlace() {
                 {product.seller}
               </p>
 
-              <h2>{product.name}</h2>
+              <h2>
+                {product.name}
+              </h2>
 
-              <p>{product.location}</p>
+              <p>
+                {product.location}
+              </p>
 
               <div className="marketplace-details">
-                <strong>N${product.price} / kg</strong>
-                <span>{product.amount} available</span>
+
+                <strong>
+                  N${product.price} / {product.unit}
+                </strong>
+
+                <span>
+                  {product.amount} available
+                </span>
+
               </div>
 
               <button>
@@ -94,6 +130,7 @@ function BuyerMarketPlace() {
             </div>
 
           </div>
+
         ))}
 
       </div>

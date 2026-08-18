@@ -6,7 +6,7 @@ function NavBar() {
       <div className="navbar-container">
 
         <Link to="/" className="logo">
-          Farm2You
+        market access
         </Link>
 
         <div className="nav-links">
