@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "matches": [
+    {
+      "id": 1,
+      "score": 92.0,
+      "distance_km": 5.2,
+      "transport_cost": 15.60,
+      "price_difference": -0.50,
+      "status": "pending",
+      "producer_name": "Green Valley Produce",
+      "producer_location": "Windhoek",
+      "available_qty": 800,
+      "seller_price": 9.50,
+      "buyer_name": "Hilton Windhoek",
+      "buyer_location": "Windhoek",
+      "demanded_qty": 300,
+      "buyer_budget": 10.00,
+      "product_name": "Tomatoes"
+    }
+  ]
+}

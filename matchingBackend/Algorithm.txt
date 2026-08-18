@@ -1,0 +1,33 @@
+
+---
+
+### 10. `docs/algorithm.md`  
+```markdown
+# Matching Algorithm – Scoring Breakdown
+
+The match score is computed using seven weighted factors, all normalized to a total of **100 points**.
+
+## Factors and Weights
+
+| Factor | Weight | Description |
+|--------|--------|-------------|
+| **Product Match** | 30 | Exact match = 30, partial match = 20, no match = 0. |
+| **Quantity Feasibility** | 20 | Buyer demand <= seller supply = 20; ≤1.5x supply = 15; ≤2.5x = 8; >2.5x = 2. |
+| **Price Alignment** | 20 | Seller price ≤ buyer budget = 20; ≤1.2x budget = 14; ≤1.5x = 7; >1.5x = 0. |
+| **Distance Score** | 15 | ≤50 km = 15; ≤150 = 12; ≤300 = 8; ≤500 = 4; >500 = 1. |
+| **Transport Cost** | 10 | ≤N$100 = 10; ≤300 = 7; ≤600 = 4; ≤1000 = 2; >1000 = 0. |
+| **Availability** | 5 | Default 5 points (all listings are active). |
+| **Recurring Demand** | 5 | Bonus if the buyer wants recurring orders. |
+
+The final score is capped at **100**.
+
+## Distance Calculation
+We use the **Haversine formula** to compute great-circle distances between Namibian towns based on latitude/longitude coordinates.
+
+## Transport Cost Estimation
+`cost = distance (km) × 2.50 N$ × (weight in tonnes)`  
+with a minimum charge of N$50 and a cap of N$20,000.
+
+## Price Difference
+`price_difference = seller_price - buyer_budget`  
+Negative means the seller is below budget (good). Positive means above budget (less attractive).

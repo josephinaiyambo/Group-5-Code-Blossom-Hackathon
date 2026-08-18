@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🇳🇦 Namibian Market Access Network — Match Engine</title>
+
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --nam-blue: #0033a0;
+            --nam-red: #c8102e;
+            --nam-green: #009543;
+            --nam-yellow: #ffd700;
+            --nam-white: #ffffff;
+            --bg-light: #f8f7f4;
+            --bg-card: #ffffff;
+            --text-primary: #1e1e2a;
+            --text-secondary: #4a4a5a;
+            --text-muted: #7a7a8a;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e8e6e0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--nam-blue);
+            border-radius: 10px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .app-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        .app-header {
+            background: var(--nam-white);
+            border-radius: var(--radius);
+            padding: 20px 32px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 28px;
+            border-left: 6px solid var(--nam-green);
+            transition: var(--transition);
+        }
+        .app-header:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .header-brand .flag-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .header-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--nam-blue);
+            letter-spacing: -0.5px;
+        }
+        .header-brand h1 span {
+            color: var(--nam-green);
+        }
+        .header-brand .sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .stat-pill {
+            background: var(--bg-light);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stat-pill i {
+            color: var(--nam-green);
+            font-size: 0.9rem;
+        }
+        .stat-pill .num {
+            color: var(--nam-blue);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ===== FLAG BADGE ===== */
+        .flag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--nam-blue), var(--nam-red));
+            color: #fff;
+            padding: 4px 14px 4px 10px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .flag-badge i {
+            font-size: 0.8rem;
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .panel:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .panel-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .panel-title i {
+            color: var(--nam-green);
+            font-size: 1rem;
+        }
+        .panel-title .badge {
+            background: var(--nam-blue);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 2px 10px;
+            border-radius: 30px;
+            margin-left: auto;
+        }
+
+        /* ===== FORMS ===== */
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .form-group label i {
+            margin-right: 6px;
+            color: var(--nam-green);
+            width: 16px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #e4e2dc;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--nam-blue);
+            box-shadow: 0 0 0 3px rgba(0, 51, 160, 0.12);
+            background: #fff;
+        }
+        .form-group input::placeholder {
+            color: #b0b0b8;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .btn-primary {
+            background: var(--nam-blue);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #002a88;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 51, 160, 0.25);
+        }
+        .btn-success {
+            background: var(--nam-green);
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: #007a3a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 149, 67, 0.25);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--nam-blue);
+            border: 2px solid var(--nam-blue);
+        }
+        .btn-outline:hover {
+            background: var(--nam-blue);
+            color: #fff;
+        }
+        .btn-danger-outline {
+            background: transparent;
+            color: var(--nam-red);
+            border: 2px solid var(--nam-red);
+        }
+        .btn-danger-outline:hover {
+            background: var(--nam-red);
+            color: #fff;
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            width: auto;
+        }
+
+        /* ===== PRODUCER / BUYER LISTS ===== */
+        .entity-list {
+            margin-top: 12px;
+            max-height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .entity-item {
+            background: var(--bg-light);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            border-left: 3px solid var(--nam-blue);
+            transition: var(--transition);
+        }
+        .entity-item:hover {
+            background: #f0efe8;
+        }
+        .entity-item .info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        .entity-item .info .name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .entity-item .info .detail {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .entity-item .info .detail i {
+            margin-right: 4px;
+        }
+        .entity-item .remove-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        .entity-item .remove-btn:hover {
+            color: var(--nam-red);
+            background: rgba(200, 16, 46, 0.08);
+        }
+
+        .entity-item.buyer-item {
+            border-left-color: var(--nam-green);
+        }
+        .entity-item.buyer-item .info .name {
+            color: var(--nam-green);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px 10px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .empty-state i {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0.4;
+        }
+
+        /* ===== MATCH RESULTS (MAIN) ===== */
+        .results-area {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .match-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .match-controls .btn {
+            width: auto;
+            flex: 1;
+            min-width: 140px;
+        }
+        .match-controls .btn i {
+            font-size: 1rem;
+        }
+
+        .match-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .match-counter strong {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        /* ===== MATCH CARDS ===== */
+        .matches-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .match-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .match-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .match-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--nam-green);
+            border-radius: 0 4px 4px 0;
+        }
+        .match-card.high-score::before {
+            background: linear-gradient(180deg, var(--nam-green), var(--nam-blue));
+        }
+        .match-card.medium-score::before {
+            background: var(--nam-yellow);
+        }
+        .match-card.low-score::before {
+            background: var(--nam-red);
+        }
+
+        .match-card .match-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .match-card .match-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .match-card .match-header .match-rank {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg-light);
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
+        .match-card .match-header .match-score {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--nam-blue);
+        }
+        .match-card .match-header .match-score span {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .match-card .match-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+        }
+        .match-card .match-body .field {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .match-card .match-body .field i {
+            width: 18px;
+            color: var(--nam-blue);
+            font-size: 0.85rem;
+        }
+        .match-card .match-body .field .highlight {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .match-card .match-body .field .price-tag {
+            background: var(--nam-green);
+            color: #fff;
+            padding: 1px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .match-card .match-body .field .price-tag.budget {
+            background: var(--nam-blue);
+        }
+
+        .match-card .match-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .match-card .match-actions .btn {
+            width: auto;
+            padding: 6px 18px;
+            font-size: 0.78rem;
+        }
+
+        /* ===== SCORE BREAKDOWN ===== */
+        .score-breakdown {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+        .score-breakdown .sb-item {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg-light);
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
+        .score-breakdown .sb-item .sb-val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ===== NO MATCHES ===== */
+        .no-matches {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+        .no-matches i {
+            font-size: 3.5rem;
+            color: var(--text-muted);
+            opacity: 0.3;
+            margin-bottom: 16px;
+        }
+        .no-matches h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .no-matches p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 360px;
+        }
+        .toast {
+            background: var(--text-primary);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            font-size: 0.85rem;
+            font-weight: 500;
+            animation: slideUp 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid var(--nam-green);
+        }
+        .toast.error {
+            border-left-color: var(--nam-red);
+        }
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .app-header {
+                padding: 16px 20px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .header-stats {
+                justify-content: flex-start;
+            }
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            .match-card {
+                grid-template-columns: 1fr;
+                padding: 16px 18px;
+            }
+            .match-card .match-actions {
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .match-card .match-body {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .match-controls {
+                flex-direction: column;
+            }
+            .match-controls .btn {
+                width: 100%;
+            }
+            .toast-container {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                max-width: none;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-brand h1 {
+                font-size: 1.2rem;
+            }
+            .stat-pill {
+                font-size: 0.7rem;
+                padding: 4px 12px;
+            }
+            .panel {
+                padding: 16px;
+            }
+        }
+
+        /* ===== UTILITY ===== */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-center {
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* glow for high score */
+        .match-card.high-score {
+            border: 1px solid rgba(0, 149, 67, 0.2);
+            background: linear-gradient(135deg, #ffffff, #f6fcf8);
+        }
+        .match-card.medium-score {
+            background: linear-gradient(135deg, #ffffff, #fefcf0);
+        }
+        .match-card.low-score {
+            background: linear-gradient(135deg, #ffffff, #fdf5f5);
+        }
+
+        /* pulse animation for new match */
+        @keyframes pulse-glow {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 149, 67, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 149, 67, 0.05);
+            }
+        }
+        .match-card.new-match {
+            animation: pulse-glow 1.2s ease 2;
+        }
+
+        /* ===== ASIAN INSPIRED TOUCHES ===== */
+        .badge-trust {
+            background: #f0f7ff;
+            color: var(--nam-blue);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(0, 51, 160, 0.12);
+        }
+        .badge-trust i {
+            color: #ffd700;
+        }
+
+        .match-card .match-header .badge-trust {
+            margin-left: 4px;
+        }
+
+        /* price per kg highlight */
+        .price-per-kg {
+            font-weight: 600;
+            color: var(--nam-green);
+        }
+
+        /* recurring indicator */
+        .recurring-badge {
+            background: #e8f5e9;
+            color: var(--nam-green);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .recurring-badge i {
+            font-size: 0.6rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="app-header">
+            <div class="header-brand">
+                <span class="flag-icon">🇳🇦</span>
+                <div>
+                    <h1>Market<span>Access</span> Network</h1>
+                    <span class="sub"><i class="fas fa-map-pin"></i> Namibia · Where supply meets demand</span>
+                </div>
+            </div>
+            <div class="header-stats">
+                <span class="stat-pill">
+                    <i class="fas fa-seedling"></i>
+                    Producers <span class="num" id="producerCount">0</span>
+                </span>
+                <span class="stat-pill">
+                    <i class="fas fa-store"></i>
+                    Buyers <span class="num" id="buyerCount">0</span>
+                </span>
+                <span class="stat-pill" style="background:var(--nam-blue);color:#fff;">
+                    <i class="fas fa-bolt"></i>
+                    Matches <span class="num" id="matchCount" style="color:#fff;">0</span>
+                </span>
+                <span class="flag-badge">
+                    <i class="fas fa-flag"></i> Hackathon 2026
+                </span>
+            </div>
+        </header>
+
+        <!-- ===== MAIN ===== -->
+        <div class="main-grid">
+
+            <!-- ===== SIDEBAR ===== -->
+            <aside class="sidebar">
+
+                <!-- ADD PRODUCER -->
+                <div class="panel">
+                    <div class="panel-title">
+                        <i class="fas fa-tractor"></i> Add Producer
+                        <span class="badge">supply</span>
+                    </div>
+                    <form id="producerForm" autocomplete="off">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Farmer / Business</label>
+                            <input type="text" id="prodName" placeholder="e.g. Okatumba Farm" required />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-apple-alt"></i> Product</label>
+                            <input type="text" id="prodProduct" placeholder="e.g. Tomatoes" required />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-weight-hanging"></i> Qty (kg)</label>
+                                <input type="number" id="prodQty" placeholder="e.g. 1500" required min="1" />
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Price (N$/kg)</label>
+                                <input type="number" id="prodPrice" placeholder="e.g. 8" required min="0.01" step="0.01" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                            <select id="prodLocation" required>
+                                <option value="">— Select Town —</option>
+                                <option value="Windhoek">Windhoek</option>
+                                <option value="Otjiwarongo">Otjiwarongo</option>
+                                <option value="Swakopmund">Swakopmund</option>
+                                <option value="Walvis Bay">Walvis Bay</option>
+                                <option value="Rundu">Rundu</option>
+                                <option value="Oshakati">Oshakati</option>
+                                <option value="Gobabis">Gobabis</option>
+                                <option value="Keetmanshoop">Keetmanshoop</option>
+                                <option value="Mariental">Mariental</option>
+                                <option value="Tsumeb">Tsumeb</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-alt"></i> Available</label>
+                            <input type="text" id="prodAvailable" placeholder="e.g. September 2026" />
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus-circle"></i> Add Producer
+                        </button>
+                    </form>
+                    <div class="entity-list" id="producerList">
+                        <!-- dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- ADD BUYER -->
+                <div class="panel">
+                    <div class="panel-title">
+                        <i class="fas fa-shopping-cart"></i> Add Buyer
+                        <span class="badge" style="background:var(--nam-green);">demand</span>
+                    </div>
+                    <form id="buyerForm" autocomplete="off">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Business / Buyer</label>
+                            <input type="text" id="buyerName" placeholder="e.g. Hilton Windhoek" required />
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-apple-alt"></i> Product Needed</label>
+                            <input type="text" id="buyerProduct" placeholder="e.g. Tomatoes" required />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-weight-hanging"></i> Qty needed (kg)</label>
+                                <input type="number" id="buyerQty" placeholder="e.g. 300" required min="1" />
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Budget (N$/kg)</label>
+                                <input type="number" id="buyerBudget" placeholder="e.g. 10" required min="0.01" step="0.01" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                            <select id="buyerLocation" required>
+                                <option value="">— Select Town —</option>
+                                <option value="Windhoek">Windhoek</option>
+                                <option value="Otjiwarongo">Otjiwarongo</option>
+                                <option value="Swakopmund">Swakopmund</option>
+                                <option value="Walvis Bay">Walvis Bay</option>
+                                <option value="Rundu">Rundu</option>
+                                <option value="Oshakati">Oshakati</option>
+                                <option value="Gobabis">Gobabis</option>
+                                <option value="Keetmanshoop">Keetmanshoop</option>
+                                <option value="Mariental">Mariental</option>
+                                <option value="Tsumeb">Tsumeb</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-sync-alt"></i> Recurring Demand?</label>
+                            <select id="buyerRecurring">
+                                <option value="false">No — one-time</option>
+                                <option value="true">Yes — recurring weekly/monthly</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Add Buyer
+                        </button>
+                    </form>
+                    <div class="entity-list" id="buyerList">
+                        <!-- dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- SAMPLE DATA BUTTON -->
+                <div class="panel" style="background:var(--nam-blue);color:#fff;border:none;">
+                    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <i class="fas fa-rocket" style="font-size:1.4rem;"></i>
+                        <span style="font-weight:500;font-size:0.9rem;flex:1;">Load sample Namibian market data</span>
+                        <button id="loadSampleBtn" class="btn" style="background:var(--nam-yellow);color:var(--text-primary);width:auto;padding:6px 20px;">
+                            <i class="fas fa-play"></i> Load
+                        </button>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- ===== RESULTS AREA ===== -->
+            <section class="results-area">
+
+                <!-- Controls -->
+                <div class="panel" style="padding:18px 24px;">
+                    <div class="match-controls">
+                        <button id="findMatchesBtn" class="btn btn-success" style="flex:2;">
+                            <i class="fas fa-compass"></i> Find Matches
+                        </button>
+                        <button id="clearMatchesBtn" class="btn btn-danger-outline" style="flex:1;">
+                            <i class="fas fa-trash-alt"></i> Clear
+                        </button>
+                        <span class="match-counter">
+                            <i class="fas fa-chart-line"></i> <strong id="matchResultCount">0</strong> matches found
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Matches -->
+                <div id="matchesContainer">
+                    <!-- dynamically rendered -->
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT — MATCH ENGINE ===== -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // =========================================================
+            // 1. DATA STORE
+            // =========================================================
+            let producers = [];
+            let buyers = [];
+            let matches = [];
+            let matchIdCounter = 0;
+
+            // =========================================================
+            // 2. NAMIBIAN LOCATION COORDINATES
+            // =========================================================
+            const LOCATION_COORDS = {
+                'Windhoek': { lat: -22.5700, lng: 17.0800 },
+                'Otjiwarongo': { lat: -20.4600, lng: 16.6500 },
+                'Swakopmund': { lat: -22.6800, lng: 14.5300 },
+                'Walvis Bay': { lat: -22.9600, lng: 14.5100 },
+                'Rundu': { lat: -17.9200, lng: 19.7700 },
+                'Oshakati': { lat: -17.7800, lng: 15.7000 },
+                'Gobabis': { lat: -22.4500, lng: 18.9700 },
+                'Keetmanshoop': { lat: -26.5800, lng: 18.1300 },
+                'Mariental': { lat: -24.6200, lng: 17.9600 },
+                'Tsumeb': { lat: -19.2300, lng: 17.7200 }
+            };
+
+            // =========================================================
+            // 3. DISTANCE CALCULATION (Haversine)
+            // =========================================================
+            function haversine(lat1, lng1, lat2, lng2) {
+                const R = 6371; // km
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLng = (lng2 - lng1) * Math.PI / 180;
+                const a = Math.sin(dLat / 2) ** 2 +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLng / 2) ** 2;
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return R * c;
+            }
+
+            function getCoords(location) {
+                return LOCATION_COORDS[location] || null;
+            }
+
+            function calculateDistance(locA, locB) {
+                const cA = getCoords(locA);
+                const cB = getCoords(locB);
+                if (!cA || !cB) return 9999;
+                return haversine(cA.lat, cA.lng, cB.lat, cB.lng);
+            }
+
+            // =========================================================
+            // 4. TRANSPORT COST ESTIMATION
+            // =========================================================
+            function estimateTransportCost(distanceKm, weightKg) {
+                // Base rate: N$ 2.50 per km per tonne, with minimum
+                const ratePerKmPerTonne = 2.50;
+                const tonnes = weightKg / 1000;
+                let cost = distanceKm * ratePerKmPerTonne * tonnes;
+                // Minimum charge
+                if (cost < 50) cost = 50;
+                // Maximum reasonable cap
+                if (cost > 20000) cost = 20000;
+                return Math.round(cost * 100) / 100;
+            }
+
+            // =========================================================
+            // 5. MATCH SCORING ENGINE
+            // =========================================================
+            function computeMatchScore(producer, buyer) {
+                // ---- Product match ----
+                let productScore = 0;
+                const prodP = producer.product.toLowerCase().trim();
+                const buyerP = buyer.product.toLowerCase().trim();
+                if (prodP === buyerP) {
+                    productScore = 30;
+                } else if (prodP.includes(buyerP) || buyerP.includes(prodP)) {
+                    productScore = 20;
+                } else {
+                    // check category keywords (simple)
+                    const categories = {
+                        'vegetable': ['tomato', 'onion', 'carrot', 'cabbage', 'spinach', 'lettuce', 'pepper'],
+                        'fruit': ['orange', 'apple', 'banana', 'grape', 'melon', 'watermelon'],
+                        'grain': ['maize', 'wheat', 'sorghum', 'millet'],
+                        'meat': ['beef', 'chicken', 'pork', 'lamb', 'goat'],
+                        'dairy': ['milk', 'cheese', 'yogurt', 'cream']
+                    };
+                    let catMatch = false;
+                    for (const [cat, items] of Object.entries(categories)) {
+                        if (items.some(i => prodP.includes(i) || i.includes(prodP)) &&
+                            items.some(i => buyerP.includes(i) || i.includes(buyerP))) {
+                            catMatch = true;
+                            break;
+                        }
+                    }
+                    if (catMatch) productScore = 12;
+                    else productScore = 0;
+                }
+
+                // ---- Quantity match ----
+                let qtyScore = 0;
+                const ratio = buyer.quantity / producer.quantity;
+                if (ratio <= 1) {
+                    qtyScore = 20; // producer can fully supply
+                } else if (ratio <= 1.5) {
+                    qtyScore = 15;
+                } else if (ratio <= 2.5) {
+                    qtyScore = 8;
+                } else {
+                    qtyScore = 2;
+                }
+
+                // ---- Price match ----
+                let priceScore = 0;
+                if (producer.price <= buyer.budget) {
+                    priceScore = 20;
+                } else if (producer.price <= buyer.budget * 1.2) {
+                    priceScore = 14;
+                } else if (producer.price <= buyer.budget * 1.5) {
+                    priceScore = 7;
+                } else {
+                    priceScore = 0;
+                }
+
+                // ---- Distance score (closer = better) ----
+                const dist = calculateDistance(producer.location, buyer.location);
+                let distanceScore = 0;
+                if (dist <= 50) distanceScore = 15;
+                else if (dist <= 150) distanceScore = 12;
+                else if (dist <= 300) distanceScore = 8;
+                else if (dist <= 500) distanceScore = 4;
+                else distanceScore = 1;
+
+                // ---- Transport cost score (lower = better) ----
+                const transportCost = estimateTransportCost(dist, buyer.quantity);
+                let transportScore = 0;
+                if (transportCost <= 100) transportScore = 10;
+                else if (transportCost <= 300) transportScore = 7;
+                else if (transportCost <= 600) transportScore = 4;
+                else if (transportCost <= 1000) transportScore = 2;
+                else transportScore = 0;
+
+                // ---- Availability ----
+                let availScore = 5;
+                if (producer.available && producer.available.toLowerCase().includes('september')) {
+                    availScore = 5;
+                } else if (producer.available && producer.available.length > 0) {
+                    availScore = 3;
+                } else {
+                    availScore = 1;
+                }
+
+                // ---- Recurring bonus ----
+                let recurringBonus = 0;
+                if (buyer.recurring === true || buyer.recurring === 'true') {
+                    recurringBonus = 5;
+                }
+
+                // ---- Total ----
+                let total = productScore + qtyScore + priceScore + distanceScore +
+                    transportScore + availScore + recurringBonus;
+
+                // Cap at 100
+                total = Math.min(100, total);
+
+                return {
+                    total: Math.round(total * 10) / 10,
+                    breakdown: {
+                        product: productScore,
+                        quantity: qtyScore,
+                        price: priceScore,
+                        distance: distanceScore,
+                        transport: transportScore,
+                        availability: availScore,
+                        recurring: recurringBonus
+                    },
+                    distance: dist,
+                    transportCost: transportCost,
+                    priceDifference: producer.price - buyer.budget
+                };
+            }
+
+            // =========================================================
+            // 6. MATCHING ENGINE
+            // =========================================================
+            function runMatching() {
+                matches = [];
+                matchIdCounter = 0;
+
+                if (producers.length === 0 || buyers.length === 0) {
+                    renderMatches();
+                    updateStats();
+                    return;
+                }
+
+                for (const buyer of buyers) {
+                    for (const producer of producers) {
+                        // Only match if product matches (at least partial)
+                        const prodP = producer.product.toLowerCase().trim();
+                        const buyerP = buyer.product.toLowerCase().trim();
+                        const isMatch = prodP === buyerP ||
+                            prodP.includes(buyerP) ||
+                            buyerP.includes(prodP) ||
+                            // category match via keyword
+                            (() => {
+                                const keywords = ['tomato', 'onion', 'carrot', 'cabbage', 'spinach', 'lettuce',
+                                    'pepper', 'orange', 'apple', 'banana', 'grape', 'melon', 'maize', 'wheat',
+                                    'sorghum', 'millet', 'beef', 'chicken', 'pork', 'lamb', 'goat', 'milk',
+                                    'cheese', 'yogurt'
+                                ];
+                                return keywords.some(k =>
+                                    prodP.includes(k) && buyerP.includes(k)
+                                );
+                            })();
+
+                        if (!isMatch) continue;
+
+                        // Compute score
+                        const result = computeMatchScore(producer, buyer);
+
+                        // Only include if score > 0
+                        if (result.total > 0) {
+                            matches.push({
+                                id: ++matchIdCounter,
+                                producer: { ...producer },
+                                buyer: { ...buyer },
+                                score: result.total,
+                                breakdown: result.breakdown,
+                                distance: result.distance,
+                                transportCost: result.transportCost,
+                                priceDifference: result.priceDifference,
+                                quantityMatch: buyer.quantity <= producer.quantity ? 'full' :
+                                    (buyer.quantity <= producer.quantity * 1.5 ? 'partial' : 'insufficient'),
+                                // timestamp for animation
+                                _ts: Date.now()
+                            });
+                        }
+                    }
+                }
+
+                // Sort by score descending
+                matches.sort((a, b) => b.score - a.score);
+
+                // Add rank
+                matches.forEach((m, i) => m.rank = i + 1);
+
+                renderMatches();
+                updateStats();
+                showToast(`✅ Found ${matches.length} match${matches.length !== 1 ? 'es' : ''}!`, 'success');
+            }
+
+            // =========================================================
+            // 7. RENDER MATCHES
+            // =========================================================
+            function renderMatches() {
+                const container = document.getElementById('matchesContainer');
+                const countEl = document.getElementById('matchResultCount');
+
+                if (!container) return;
+
+                if (matches.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-matches">
+                            <i class="fas fa-handshake"></i>
+                            <h3>No matches yet</h3>
+                            <p>Add producers and buyers, then click <strong>"Find Matches"</strong></p>
+                            <p style="font-size:0.8rem;margin-top:8px;color:var(--text-muted);">
+                                <i class="fas fa-lightbulb"></i> Tip: Make sure product names match (e.g. "Tomatoes" &amp; "Tomatoes")
+                            </p>
+                        </div>
+                    `;
+                    if (countEl) countEl.textContent = '0';
+                    return;
+                }
+
+                if (countEl) countEl.textContent = matches.length;
+
+                let html = `<div class="matches-list">`;
+
+                matches.forEach((match, idx) => {
+                    const scoreClass = match.score >= 75 ? 'high-score' :
+                        match.score >= 50 ? 'medium-score' : 'low-score';
+
+                    const qtyStatus = match.quantityMatch === 'full' ?
+                        '<span style="color:var(--nam-green);font-weight:600;">✓ Full supply</span>' :
+                        match.quantityMatch === 'partial' ?
+                        '<span style="color:var(--nam-yellow);font-weight:600;">⚠️ Partial</span>' :
+                        '<span style="color:var(--nam-red);font-weight:600;">✗ Insufficient</span>';
+
+                    const priceDiff = match.priceDifference;
+                    const priceDiffStr = priceDiff <= 0 ?
+                        `<span style="color:var(--nam-green);font-weight:600;">N$${Math.abs(priceDiff).toFixed(2)} below budget</span>` :
+                        `<span style="color:var(--nam-red);font-weight:600;">N$${priceDiff.toFixed(2)} above budget</span>`;
+
+                    html += `
+                        <div class="match-card ${scoreClass} new-match" style="animation-delay:${idx * 0.05}s;">
+                            <div class="match-content">
+                                <div class="match-header">
+                                    <span class="match-rank"><i class="fas fa-trophy"></i> #${match.rank}</span>
+                                    <span class="match-score">${match.score} <span>/ 100</span></span>
+                                    <span class="badge-trust"><i class="fas fa-shield-alt"></i> Verified</span>
+                                    ${match.buyer.recurring === true || match.buyer.recurring === 'true' ? 
+                                        `<span class="recurring-badge"><i class="fas fa-sync-alt"></i> Recurring</span>` : ''}
+                                    <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">
+                                        <i class="fas fa-clock"></i> ${new Date(match._ts).toLocaleTimeString()}
+                                    </span>
+                                </div>
+
+                                <div class="match-body">
+                                    <div class="field">
+                                        <i class="fas fa-tractor"></i>
+                                        <span><span class="highlight">${match.producer.name}</span> · ${match.producer.product}</span>
+                                        <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">
+                                            ${match.producer.location}
+                                        </span>
+                                    </div>
+                                    <div class="field">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span><span class="highlight">${match.buyer.name}</span> · ${match.buyer.product}</span>
+                                        <span style="margin-left:auto;font-size:0.7rem;color:var(--text-muted);">
+                                            ${match.buyer.location}
+                                        </span>
+                                    </div>
+                                    <div class="field">
+                                        <i class="fas fa-weight-hanging"></i>
+                                        <span>Supply: <span class="highlight">${match.producer.quantity} kg</span></span>
+                                        <span style="margin-left:auto;">Demand: <span class="highlight">${match.buyer.quantity} kg</span></span>
+                                    </div>
+                                    <div class="field">
+                                        <i class="fas fa-tag"></i>
+                                        <span>Seller: <span class="price-tag">N$${match.producer.price}/kg</span></span>
+                                        <span style="margin-left:auto;">Budget: <span class="price-tag budget">N$${match.buyer.budget}/kg</span></span>
+                                    </div>
+                                    <div class="field" style="grid-column:1 / -1;">
+                                        <i class="fas fa-road"></i>
+                                        <span>Distance: <span class="highlight">${match.distance.toFixed(1)} km</span></span>
+                                        <span style="margin-left:auto;">Transport: <span class="highlight">N$${match.transportCost.toFixed(2)}</span></span>
+                                        <span style="margin-left:12px;">${priceDiffStr}</span>
+                                    </div>
+                                    <div class="field" style="grid-column:1 / -1;border-top:1px solid #eee;padding-top:6px;flex-wrap:wrap;">
+                                        <span>${qtyStatus}</span>
+                                        <span style="margin-left:12px;font-size:0.7rem;color:var(--text-muted);">
+                                            <i class="fas fa-chart-pie"></i> 
+                                            Product ${match.breakdown.product} · Qty ${match.breakdown.quantity} · Price ${match.breakdown.price} · 
+                                            Dist ${match.breakdown.distance} · Trans ${match.breakdown.transport} · Avail ${match.breakdown.availability}
+                                            ${match.breakdown.recurring ? `· Recur ${match.breakdown.recurring}` : ''}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="match-actions">
+                                <button class="btn btn-primary btn-sm" onclick="window.contactMatch(${match.id})">
+                                    <i class="fas fa-phone"></i> Connect
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="window.detailsMatch(${match.id})">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                container.innerHTML = html;
+            }
+
+            // =========================================================
+            // 8. RENDER ENTITY LISTS
+            // =========================================================
+            function renderProducerList() {
+                const container = document.getElementById('producerList');
+                if (!container) return;
+                if (producers.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-seedling"></i>
+                            No producers added yet
+                        </div>
+                    `;
+                    return;
+                }
+                let html = '';
+                producers.forEach((p, idx) => {
+                    html += `
+                        <div class="entity-item">
+                            <div class="info">
+                                <span class="name">${p.name}</span>
+                                <span class="detail">
+                                    <i class="fas fa-apple-alt"></i> ${p.product} · 
+                                    <i class="fas fa-weight-hanging"></i> ${p.quantity} kg · 
+                                    <i class="fas fa-tag"></i> N$${p.price}/kg · 
+                                    <i class="fas fa-map-pin"></i> ${p.location}
+                                    ${p.available ? `· <i class="fas fa-calendar"></i> ${p.available}` : ''}
+                                </span>
+                            </div>
+                            <button class="remove-btn" data-index="${idx}" data-type="producer" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+                // attach remove events
+                container.querySelectorAll('.remove-btn[data-type="producer"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.index);
+                        producers.splice(idx, 1);
+                        renderProducerList();
+                        updateStats();
+                        // clear matches if any
+                        if (matches.length > 0) { matches = [];
+                            renderMatches(); }
+                        showToast('🗑️ Producer removed', 'info');
+                    });
+                });
+            }
+
+            function renderBuyerList() {
+                const container = document.getElementById('buyerList');
+                if (!container) return;
+                if (buyers.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-store"></i>
+                            No buyers added yet
+                        </div>
+                    `;
+                    return;
+                }
+                let html = '';
+                buyers.forEach((b, idx) => {
+                    const recurring = b.recurring === true || b.recurring === 'true';
+                    html += `
+                        <div class="entity-item buyer-item">
+                            <div class="info">
+                                <span class="name">${b.name}</span>
+                                <span class="detail">
+                                    <i class="fas fa-apple-alt"></i> ${b.product} · 
+                                    <i class="fas fa-weight-hanging"></i> ${b.quantity} kg · 
+                                    <i class="fas fa-tag"></i> N$${b.budget}/kg · 
+                                    <i class="fas fa-map-pin"></i> ${b.location}
+                                    ${recurring ? '· <i class="fas fa-sync-alt" style="color:var(--nam-green);"></i> Recurring' : ''}
+                                </span>
+                            </div>
+                            <button class="remove-btn" data-index="${idx}" data-type="buyer" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+                container.querySelectorAll('.remove-btn[data-type="buyer"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.index);
+                        buyers.splice(idx, 1);
+                        renderBuyerList();
+                        updateStats();
+                        if (matches.length > 0) { matches = [];
+                            renderMatches(); }
+                        showToast('🗑️ Buyer removed', 'info');
+                    });
+                });
+            }
+
+            // =========================================================
+            // 9. UPDATE STATS
+            // =========================================================
+            function updateStats() {
+                document.getElementById('producerCount').textContent = producers.length;
+                document.getElementById('buyerCount').textContent = buyers.length;
+                document.getElementById('matchCount').textContent = matches.length;
+                document.getElementById('matchResultCount').textContent = matches.length;
+            }
+
+            // =========================================================
+            // 10. TOAST
+            // =========================================================
+            function showToast(message, type = 'success') {
+                const container = document.getElementById('toastContainer');
+                if (!container) return;
+                const toast = document.createElement('div');
+                toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+                const icon = type === 'success' ? 'fa-check-circle' :
+                    type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+                toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+                container.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(30px)';
+                    toast.style.transition = 'all 0.4s ease';
+                    setTimeout(() => toast.remove(), 400);
+                }, 3500);
+            }
+
+            // =========================================================
+            // 11. FORM HANDLERS
+            // =========================================================
+            // Producer form
+            document.getElementById('producerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('prodName').value.trim();
+                const product = document.getElementById('prodProduct').value.trim();
+                const qty = parseFloat(document.getElementById('prodQty').value);
+                const price = parseFloat(document.getElementById('prodPrice').value);
+                const location = document.getElementById('prodLocation').value;
+                const available = document.getElementById('prodAvailable').value.trim();
+
+                if (!name || !product || !qty || !price || !location) {
+                    showToast('⚠️ Please fill in all required fields', 'error');
+                    return;
+                }
+
+                producers.push({
+                    name,
+                    product,
+                    quantity: qty,
+                    price,
+                    location,
+                    available: available || 'Now'
+                });
+
+                this.reset();
+                renderProducerList();
+                updateStats();
+                if (matches.length > 0) { matches = [];
+                    renderMatches(); }
+                showToast(`✅ Added producer: ${name} (${product})`, 'success');
+                // focus back
+                document.getElementById('prodName').focus();
+            });
+
+            // Buyer form
+            document.getElementById('buyerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('buyerName').value.trim();
+                const product = document.getElementById('buyerProduct').value.trim();
+                const qty = parseFloat(document.getElementById('buyerQty').value);
+                const budget = parseFloat(document.getElementById('buyerBudget').value);
+                const location = document.getElementById('buyerLocation').value;
+                const recurring = document.getElementById('buyerRecurring').value;
+
+                if (!name || !product || !qty || !budget || !location) {
+                    showToast('⚠️ Please fill in all required fields', 'error');
+                    return;
+                }
+
+                buyers.push({
+                    name,
+                    product,
+                    quantity: qty,
+                    budget,
+                    location,
+                    recurring: recurring === 'true'
+                });
+
+                this.reset();
+                renderBuyerList();
+                updateStats();
+                if (matches.length > 0) { matches = [];
+                    renderMatches(); }
+                showToast(`✅ Added buyer: ${name} (${product})`, 'success');
+                document.getElementById('buyerName').focus();
+            });
+
+            // =========================================================
+            // 12. SAMPLE DATA (Namibian Market)
+            // =========================================================
+            function loadSampleData() {
+                // Clear existing
+                producers = [];
+                buyers = [];
+                matches = [];
+
+                producers.push({
+                    name: 'Okatumba Farm',
+                    product: 'Tomatoes',
+                    quantity: 1500,
+                    price: 8.00,
+                    location: 'Otjiwarongo',
+                    available: 'September 2026'
+                }, {
+                    name: 'Green Valley Produce',
+                    product: 'Tomatoes',
+                    quantity: 800,
+                    price: 9.50,
+                    location: 'Windhoek',
+                    available: 'Now'
+                }, {
+                    name: 'Namib Fresh',
+                    product: 'Onions',
+                    quantity: 2000,
+                    price: 6.00,
+                    location: 'Mariental',
+                    available: 'October 2026'
+                }, {
+                    name: 'Oshakati Greens',
+                    product: 'Cabbage',
+                    quantity: 1200,
+                    price: 5.50,
+                    location: 'Oshakati',
+                    available: 'Now'
+                }, {
+                    name: 'Rundu River Farms',
+                    product: 'Maize',
+                    quantity: 5000,
+                    price: 4.00,
+                    location: 'Rundu',
+                    available: 'September 2026'
+                }, {
+                    name: 'Coastal Organics',
+                    product: 'Lettuce',
+                    quantity: 400,
+                    price: 12.00,
+                    location: 'Swakopmund',
+                    available: 'Now'
+                }, {
+                    name: 'Tsumeb Golden Produce',
+                    product: 'Carrots',
+                    quantity: 900,
+                    price: 7.00,
+                    location: 'Tsumeb',
+                    available: 'Now'
+                }, {
+                    name: 'Gobabis Grain Co.',
+                    product: 'Wheat',
+                    quantity: 8000,
+                    price: 3.50,
+                    location: 'Gobabis',
+                    available: 'November 2026'
+                });
+
+                buyers.push({
+                    name: 'Hilton Windhoek',
+                    product: 'Tomatoes',
+                    quantity: 300,
+                    budget: 10.00,
+                    location: 'Windhoek',
+                    recurring: true
+                }, {
+                    name: 'Namibia School Catering',
+                    product: 'Tomatoes',
+                    quantity: 500,
+                    budget: 8.50,
+                    location: 'Windhoek',
+                    recurring: false
+                }, {
+                    name: 'The Olive Restaurant',
+                    product: 'Onions',
+                    quantity: 200,
+                    budget: 7.00,
+                    location: 'Windhoek',
+                    recurring: true
+                }, {
+                    name: 'Swakopmund Hotel',
+                    product: 'Lettuce',
+                    quantity: 150,
+                    budget: 14.00,
+                    location: 'Swakopmund',
+                    recurring: true
+                }, {
+                    name: 'Oshakati Fresh Market',
+                    product: 'Cabbage',
+                    quantity: 600,
+                    budget: 6.00,
+                    location: 'Oshakati',
+                    recurring: false
+                }, {
+                    name: 'Rundu Wholesale',
+                    product: 'Maize',
+                    quantity: 2000,
+                    budget: 4.50,
+                    location: 'Rundu',
+                    recurring: true
+                }, {
+                    name: 'Gobabis Supermarket',
+                    product: 'Wheat',
+                    quantity: 1500,
+                    budget: 4.00,
+                    location: 'Gobabis',
+                    recurring: true
+                }, {
+                    name: 'Tsumeb Guesthouse',
+                    product: 'Carrots',
+                    quantity: 100,
+                    budget: 8.00,
+                    location: 'Tsumeb',
+                    recurring: false
+                });
+
+                renderProducerList();
+                renderBuyerList();
+                updateStats();
+                matches = [];
+                renderMatches();
+                showToast('🇳🇦 Sample Namibian market data loaded! Click "Find Matches"', 'success');
+            }
+
+            document.getElementById('loadSampleBtn').addEventListener('click', loadSampleData);
+
+            // =========================================================
+            // 13. MATCH BUTTONS
+            // =========================================================
+            document.getElementById('findMatchesBtn').addEventListener('click', function() {
+                if (producers.length === 0) {
+                    showToast('⚠️ Add at least one producer first', 'error');
+                    return;
+                }
+                if (buyers.length === 0) {
+                    showToast('⚠️ Add at least one buyer first', 'error');
+                    return;
+                }
+                runMatching();
+            });
+
+            document.getElementById('clearMatchesBtn').addEventListener('click', function() {
+                matches = [];
+                renderMatches();
+                updateStats();
+                showToast('🧹 Matches cleared', 'info');
+            });
+
+            // =========================================================
+            // 14. GLOBAL ACTION FUNCTIONS (for inline onclick)
+            // =========================================================
+            window.contactMatch = function(id) {
+                const match = matches.find(m => m.id === id);
+                if (!match) return;
+                showToast(`📞 Connecting you with ${match.producer.name} for ${match.producer.product}...`, 'success');
+            };
+
+            window.detailsMatch = function(id) {
+                const match = matches.find(m => m.id === id);
+                if (!match) return;
+                const msg =
+                    `📋 Match #${match.rank}\n` +
+                    `Producer: ${match.producer.name} (${match.producer.location})\n` +
+                    `Product: ${match.producer.product} · ${match.producer.quantity} kg @ N$${match.producer.price}/kg\n` +
+                    `Buyer: ${match.buyer.name} (${match.buyer.location})\n` +
+                    `Demand: ${match.buyer.product} · ${match.buyer.quantity} kg @ N$${match.buyer.budget}/kg\n` +
+                    `Distance: ${match.distance.toFixed(1)} km · Transport: N$${match.transportCost.toFixed(2)}\n` +
+                    `Score: ${match.score}/100`;
+                alert(msg);
+            };
+
+            // =========================================================
+            // 15. INIT
+            // =========================================================
+            renderProducerList();
+            renderBuyerList();
+            updateStats();
+            renderMatches();
+
+            // Auto-load sample data with a small delay for first-time users
+            setTimeout(() => {
+                if (producers.length === 0 && buyers.length === 0) {
+                    loadSampleData();
+                    // then auto-run matches after a moment
+                    setTimeout(() => {
+                        if (producers.length > 0 && buyers.length > 0) {
+                            runMatching();
+                        }
+                    }, 300);
+                }
+            }, 400);
+
+            console.log('🇳🇦 Namibian Market Access Network — Match Engine loaded');
+            console.log(`📦 ${producers.length} producers, ${buyers.length} buyers`);
+
+        })();
+    </script>
+
+</body>
+</html>
