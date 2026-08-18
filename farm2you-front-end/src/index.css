@@ -1,0 +1,492 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f8ef;
+  color: #18351d;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+  width: 100%;
+  background: #f8fbed;
+  border-bottom: 1px solid #e2ead8;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: auto;
+
+  min-height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 35px;
+}
+
+.logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: bold;
+  color: #173d1d;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav-links a {
+  font-size: 15px;
+  color: #29462d;
+
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #528b4c;
+}
+
+.login-button {
+  background: transparent;
+
+  border: 1px solid #315d34;
+
+  color: #315d34;
+
+  padding: 10px 22px;
+
+  border-radius: 5px;
+
+  font-weight: 600;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero {
+  max-width: 1200px;
+  min-height: 600px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: 45% 55%;
+
+  background: #e6f1d8;
+}
+
+.hero-text {
+  padding: 90px 30px 70px 70px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.hero-small {
+  font-size: 12px;
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 20px;
+
+  color: #5e8056;
+}
+
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(50px, 6vw, 76px);
+
+  line-height: 0.98;
+
+  color: #173d1d;
+
+  margin-bottom: 25px;
+}
+
+.hero-description {
+  max-width: 450px;
+
+  line-height: 1.7;
+
+  color: #536653;
+
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.primary-button {
+  border: none;
+
+  background: #376e3b;
+
+  color: white;
+
+  padding: 14px 25px;
+
+  border-radius: 5px;
+
+  font-weight: bold;
+
+  transition: 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #28572d;
+
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  background: transparent;
+
+  border: 1px solid #376e3b;
+
+  color: #376e3b;
+
+  padding: 14px 25px;
+
+  border-radius: 5px;
+
+  font-weight: bold;
+}
+
+.hero-image {
+  width: 100%;
+  height: 600px;
+
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ================================
+   PRODUCTS
+================================ */
+
+.products-section {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 80px 70px;
+
+  background: #fbfdf5;
+}
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 45px;
+}
+
+.section-heading p {
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: #65805f;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+.section-heading h2 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 42px;
+
+  color: #1e4122;
+}
+
+.product-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px;
+}
+
+.product-card {
+  transition: 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border-radius: 7px;
+}
+
+.product-info {
+  padding-top: 15px;
+}
+
+.product-info h3 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 18px;
+
+  margin-bottom: 7px;
+}
+
+.product-location {
+  color: #738071;
+
+  font-size: 13px;
+
+  margin-bottom: 5px;
+}
+
+.product-price {
+  font-weight: bold;
+
+  color: #29572e;
+}
+
+
+/* ================================
+   PROMOTION CARDS
+================================ */
+
+.promo-section {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 10px 70px 80px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 25px;
+
+  background: #fbfdf5;
+}
+
+.promo-card {
+  min-height: 290px;
+
+  background: #e0eccb;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+}
+
+.promo-text {
+  padding: 40px 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.promo-text > p {
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 10px;
+
+  color: #61795c;
+}
+
+.promo-text h2 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 32px;
+
+  margin-bottom: 25px;
+}
+
+.promo-text button {
+  align-self: flex-start;
+}
+
+.promo-image {
+  height: 100%;
+}
+
+.promo-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+  max-width: 1200px;
+
+  margin: auto;
+
+  background: #285b30;
+
+  color: #edf5e5;
+
+  padding: 60px 70px;
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr;
+
+  gap: 70px;
+}
+
+.footer-column h3 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 20px;
+
+  margin-bottom: 18px;
+}
+
+.footer-column p {
+  color: #d2e1ce;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image {
+    height: 450px;
+  }
+
+  .hero-text {
+    padding: 60px 35px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .promo-section {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 550px) {
+
+  .navbar-container {
+    padding: 0 20px;
+  }
+
+  .login-button {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .products-section {
+    padding: 60px 25px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-section {
+    padding: 10px 25px 60px;
+  }
+
+  .promo-card {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-image {
+    min-height: 220px;
+  }
+
+  footer {
+    padding: 50px 25px;
+  }
+}
