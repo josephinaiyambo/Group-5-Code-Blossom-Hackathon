@@ -1,6 +1,4 @@
-/* ================================
-   GLOBAL
-================================ */
+
 
 * {
   box-sizing: border-box;
@@ -28,10 +26,6 @@ button {
   cursor: pointer;
 }
 
-
-/* ================================
-   NAVBAR
-================================ */
 
 .navbar {
   width: 100%;
@@ -91,9 +85,6 @@ button {
 }
 
 
-/* ================================
-   HERO
-================================ */
 
 .hero {
   max-width: 1200px;
@@ -206,9 +197,6 @@ button {
 }
 
 
-/* ================================
-   PRODUCTS
-================================ */
 
 .products-section {
   max-width: 1200px;
@@ -299,9 +287,6 @@ button {
 }
 
 
-/* ================================
-   PROMOTION CARDS
-================================ */
 
 .promo-section {
   max-width: 1200px;
@@ -377,10 +362,6 @@ button {
 }
 
 
-/* ================================
-   FOOTER
-================================ */
-
 footer {
   max-width: 1200px;
 
@@ -415,10 +396,6 @@ footer {
   line-height: 1.7;
 }
 
-
-/* ================================
-   RESPONSIVE
-================================ */
 
 @media (max-width: 900px) {
 
@@ -489,4 +466,424 @@ footer {
   footer {
     padding: 50px 25px;
   }
+}
+
+
+.login-page {
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #edf5df,
+      #dbe9c9
+    );
+}
+
+.login-card {
+  width: 100%;
+  max-width: 470px;
+
+  background: #ffffff;
+
+  padding: 50px;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 50px rgba(34, 74, 39, 0.1);
+}
+
+.login-heading {
+  margin-bottom: 35px;
+}
+
+.login-heading > p {
+  font-size: 11px;
+  letter-spacing: 2px;
+
+  color: #65805f;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+.login-heading h1 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 45px;
+
+  color: #173d1d;
+
+  margin-bottom: 10px;
+}
+
+.login-heading span {
+  color: #71806f;
+
+  line-height: 1.6;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+
+  color: #29462d;
+
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border:
+    1px solid #ced9c6;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #fbfdf8;
+
+  font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #376e3b;
+}
+
+.login-submit {
+  width: 100%;
+
+  border: none;
+
+  background: #376e3b;
+
+  color: white;
+
+  padding: 15px;
+
+  border-radius: 6px;
+
+  font-weight: bold;
+
+  font-size: 15px;
+}
+
+.login-submit:hover {
+  background: #28572d;
+}
+
+
+
+.dashboard-page {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 60px;
+
+  min-height: calc(100vh - 80px);
+
+  background: #fbfdf5;
+}
+
+.dashboard-heading {
+  margin-bottom: 45px;
+}
+
+.dashboard-heading > div > p {
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: #65805f;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+.dashboard-heading h1 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 45px;
+
+  color: #173d1d;
+
+  margin-bottom: 10px;
+}
+
+.dashboard-heading span {
+  color: #71806f;
+}
+
+
+.marketplace-tools {
+  display: grid;
+
+  grid-template-columns:
+    1fr 250px;
+
+  gap: 15px;
+
+  margin-bottom: 35px;
+}
+
+.marketplace-tools input,
+.marketplace-tools select {
+  padding: 14px;
+
+  border:
+    1px solid #d3ddcb;
+
+  border-radius: 6px;
+
+  background: white;
+}
+
+.marketplace-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+.marketplace-card {
+  background: white;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  border:
+    1px solid #e1e8da;
+
+  transition: 0.2s ease;
+}
+
+.marketplace-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 30px
+    rgba(28, 63, 31, 0.08);
+}
+
+.marketplace-image-placeholder {
+  height: 180px;
+
+  background: #e4efd6;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  font-size: 65px;
+}
+
+.marketplace-card-content {
+  padding: 22px;
+}
+
+.seller-name {
+  font-size: 12px;
+
+  color: #758772;
+
+  margin-bottom: 6px;
+}
+
+.marketplace-card h2 {
+  font-family: Georgia, serif;
+
+  color: #1d4122;
+
+  margin-bottom: 7px;
+}
+
+.marketplace-details {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin:
+    20px 0;
+}
+
+.marketplace-details strong {
+  color: #2f6937;
+}
+
+.marketplace-details span {
+  font-size: 12px;
+
+  color: #778374;
+}
+
+.marketplace-card button {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: #376e3b;
+
+  color: white;
+
+  font-weight: bold;
+}
+
+
+
+.seller-layout {
+  display: grid;
+
+  grid-template-columns:
+    400px 1fr;
+
+  gap: 40px;
+}
+
+.add-product-panel,
+.seller-products {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #e1e8da;
+}
+
+.add-product-panel h2,
+.seller-products h2 {
+  font-family: Georgia, serif;
+
+  color: #1d4122;
+
+  margin-bottom: 25px;
+}
+
+.empty-products {
+  text-align: center;
+
+  padding: 70px 20px;
+
+  color: #71806f;
+}
+
+.empty-products span {
+  display: block;
+
+  font-size: 60px;
+
+  margin-bottom: 20px;
+}
+
+.empty-products h3 {
+  color: #29462d;
+
+  margin-bottom: 8px;
+}
+
+.seller-product-card {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px;
+
+  border:
+    1px solid #e0e7da;
+
+  border-radius: 7px;
+
+  margin-bottom: 15px;
+}
+
+.seller-product-card h3 {
+  color: #254b29;
+
+  margin-bottom: 5px;
+}
+
+.seller-product-card p,
+.seller-product-card span {
+  font-size: 13px;
+
+  color: #71806f;
+}
+
+.seller-product-card strong {
+  font-size: 20px;
+
+  color: #316838;
+}
+
+
+
+
+@media (max-width: 900px) {
+
+  .marketplace-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .seller-layout {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .dashboard-page {
+    padding: 35px 20px;
+  }
+
+  .marketplace-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .marketplace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .login-card {
+    padding: 35px 25px;
+  }
+
 }

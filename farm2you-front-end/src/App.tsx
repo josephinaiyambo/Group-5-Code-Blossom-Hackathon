@@ -5,7 +5,11 @@ import {
 } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import BuyerMarketPlace from "./pages/BuyerMarketPlace";
+import SellerDashboard from "./pages/SellerDashboard";
 
 function App() {
   return (
@@ -14,7 +18,27 @@ function App() {
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/buyer"
+          element={<BuyerMarketPlace />}
+        />
+
+        <Route
+          path="/seller"
+          element={<SellerDashboard />}
+        />
+
       </Routes>
 
     </BrowserRouter>

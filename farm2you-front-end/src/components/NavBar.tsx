@@ -17,9 +17,9 @@ function NavBar() {
           <Link to="/matches">Matches</Link>
         </div>
 
-        <button className="login-button">
-          Login
-        </button>
+      <Link to="/login" className="login-button">
+  Login
+</Link>
 
       </div>
     </nav>
