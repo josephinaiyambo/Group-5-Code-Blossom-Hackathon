@@ -9,17 +9,25 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import BuyerMarketPlace from "./pages/BuyerMarketPlace";
+
+import BuyerNeed from "./pages/BuyerNeed";
+import MatchResults from "./pages/MatchResults";
+
 import SellerDashboard from "./pages/SellerDashboard";
+import SellerMatches from "./pages/SellerMatches";
 
 function App() {
   return (
     <BrowserRouter>
+
       <NavBar />
 
       <Routes>
 
-        {/* Public pages */}
+        {/* =====================
+            PUBLIC
+        ===================== */}
+
         <Route
           path="/"
           element={<Home />}
@@ -30,26 +38,43 @@ function App() {
           element={<Login />}
         />
 
-        {/* Buyer pages */}
-        <Route
-          path="/marketplace"
-          element={
-            <ProtectedRoute allowedRole="buyer">
-              <BuyerMarketPlace />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* =====================
+            BUYER
+        ===================== */}
 
         <Route
           path="/buy"
           element={
             <ProtectedRoute allowedRole="buyer">
-              <BuyerMarketPlace />
+              <BuyerNeed />
             </ProtectedRoute>
           }
         />
 
-        {/* Seller pages */}
+        <Route
+          path="/buyer/need"
+          element={
+            <ProtectedRoute allowedRole="buyer">
+              <BuyerNeed />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/buyer/matches"
+          element={
+            <ProtectedRoute allowedRole="buyer">
+              <MatchResults />
+            </ProtectedRoute>
+          }
+        />
+
+
+        {/* =====================
+            SELLER
+        ===================== */}
+
         <Route
           path="/sell"
           element={
@@ -68,7 +93,17 @@ function App() {
           }
         />
 
+        <Route
+          path="/seller/matches"
+          element={
+            <ProtectedRoute allowedRole="seller">
+              <SellerMatches />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
+
     </BrowserRouter>
   );
 }

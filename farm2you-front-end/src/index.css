@@ -966,3 +966,540 @@ footer {
 
   font-size: 13px;
 }
+
+/* ====================================
+   MATCHING EXPERIENCE
+==================================== */
+
+.matching-page,
+.match-results-page {
+  min-height: calc(100vh - 80px);
+  background: #f7faef;
+}
+
+
+/* ====================================
+   BUYER NEED SCREEN
+==================================== */
+
+.matching-page {
+  display: grid;
+  grid-template-columns: 1fr 520px;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 80px 60px;
+
+  gap: 80px;
+
+  align-items: center;
+}
+
+.need-header > p,
+.match-results-header > div > p {
+  font-size: 11px;
+
+  letter-spacing: 2.5px;
+
+  font-weight: bold;
+
+  color: #64815e;
+
+  margin-bottom: 18px;
+}
+
+.need-header h1 {
+  font-family: Georgia, serif;
+
+  font-size: 64px;
+
+  line-height: 1;
+
+  color: #173d1d;
+
+  margin-bottom: 25px;
+}
+
+.need-header span {
+  display: block;
+
+  max-width: 450px;
+
+  line-height: 1.7;
+
+  color: #6d7d69;
+}
+
+
+/* Form card */
+
+.need-card {
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 18px;
+
+  border: 1px solid #e0e8d8;
+
+  box-shadow:
+    0 20px 60px
+    rgba(32, 75, 35, 0.08);
+}
+
+.need-row {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  gap: 15px;
+}
+
+
+/* Money */
+
+.money-input {
+  display: flex;
+
+  border: 1px solid #ced9c6;
+
+  border-radius: 6px;
+
+  overflow: hidden;
+
+  background: #fbfdf8;
+}
+
+.money-input span {
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 15px;
+
+  background: #edf3e7;
+
+  font-weight: bold;
+
+  color: #376e3b;
+}
+
+.money-input input {
+  border: none !important;
+
+  border-radius: 0 !important;
+}
+
+
+/* Urgency */
+
+.urgency-options {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.urgency {
+  padding: 13px 10px;
+
+  border-radius: 7px;
+
+  border: 1px solid #d6dfcf;
+
+  background: white;
+
+  color: #52674f;
+
+  font-weight: 600;
+}
+
+.urgency.active {
+  background: #e1efd5;
+
+  border-color: #4d7c4c;
+
+  color: #285a2f;
+}
+
+
+/* Find button */
+
+.find-match-button {
+  width: 100%;
+
+  margin-top: 15px;
+
+  padding: 17px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #326c39;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.find-match-button:hover {
+  background: #24582b;
+}
+
+
+/* ====================================
+   MATCH RESULT SCREEN
+==================================== */
+
+.match-results-page {
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding: 60px;
+}
+
+.match-results-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 35px;
+}
+
+.match-results-header h1 {
+  font-family: Georgia, serif;
+
+  font-size: 48px;
+
+  color: #173d1d;
+
+  margin-bottom: 8px;
+}
+
+.match-results-header span {
+  color: #72806e;
+}
+
+.match-counter {
+  color: #738170;
+
+  font-size: 14px;
+}
+
+
+/* Tinder card */
+
+.match-card {
+  width: 100%;
+
+  max-width: 720px;
+
+  margin: auto;
+
+  background: white;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  border: 1px solid #dce6d5;
+
+  box-shadow:
+    0 25px 70px
+    rgba(29, 68, 33, 0.13);
+}
+
+
+/* Image */
+
+.match-image {
+  width: 100%;
+
+  height: 350px;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.match-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.match-score {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  background: #326c39;
+
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 30px;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+}
+
+
+/* Content */
+
+.match-content {
+  padding: 35px;
+}
+
+.match-category {
+  font-size: 11px;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  color: #66915f;
+
+  margin-bottom: 8px;
+}
+
+.match-content h2 {
+  font-family: Georgia, serif;
+
+  font-size: 36px;
+
+  color: #173d1d;
+
+  margin-bottom: 5px;
+}
+
+.match-content h3 {
+  font-size: 17px;
+
+  color: #496147;
+
+  margin-bottom: 10px;
+}
+
+.match-location {
+  color: #788574;
+
+  font-size: 14px;
+}
+
+
+/* Stats */
+
+.match-information {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 12px;
+
+  margin: 30px 0;
+}
+
+.match-stat {
+  padding: 18px;
+
+  background: #f4f8ed;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.match-stat span {
+  font-size: 9px;
+
+  letter-spacing: 1.5px;
+
+  color: #7c8d78;
+}
+
+.match-stat strong {
+  color: #275b2e;
+}
+
+
+/* Budget */
+
+.budget-comparison {
+  padding: 20px;
+
+  background: #fbfcf8;
+
+  border: 1px solid #e2eadc;
+
+  border-radius: 10px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+}
+
+.budget-comparison div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.budget-comparison span {
+  font-size: 11px;
+
+  color: #788675;
+}
+
+.budget-comparison strong {
+  color: #334e34;
+}
+
+.budget-comparison .saving strong {
+  color: #2f7a38;
+}
+
+
+
+
+.match-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 2fr;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.skip-button,
+.choose-button {
+  min-height: 58px;
+
+  border-radius: 30px;
+
+  font-weight: bold;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.skip-button {
+  background: white;
+
+  border: 1px solid #d2dbcd;
+
+  color: #7b8677;
+}
+
+.choose-button {
+  border: none;
+
+  background: #326c39;
+
+  color: white;
+}
+
+.skip-button span,
+.choose-button span {
+  margin-left: 8px;
+}
+
+.choose-button:hover {
+  background: #24582b;
+}
+
+
+
+@media (max-width: 850px) {
+
+  .matching-page {
+    grid-template-columns: 1fr;
+
+    padding: 50px 25px;
+
+    gap: 40px;
+  }
+
+  .need-header h1 {
+    font-size: 48px;
+  }
+
+  .match-results-page {
+    padding: 40px 20px;
+  }
+
+  .match-results-header {
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .match-information,
+  .budget-comparison {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .need-card {
+    padding: 25px;
+  }
+
+  .need-row {
+    grid-template-columns: 1fr;
+  }
+
+  .urgency-options {
+    grid-template-columns: 1fr;
+  }
+
+  .match-image {
+    height: 260px;
+  }
+
+  .match-content {
+    padding: 25px;
+  }
+
+  .match-content h2 {
+    font-size: 29px;
+  }
+
+  .match-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
