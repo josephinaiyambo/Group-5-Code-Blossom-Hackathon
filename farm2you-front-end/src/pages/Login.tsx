@@ -11,14 +11,16 @@ function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Temporary demo authentication
+    // Temporary hackathon login
     localStorage.setItem("userRole", role);
     localStorage.setItem("userEmail", email);
-if (role === "buyer") {
-  navigate("/buyer/need");
-} else {
-  navigate("/seller");
-};
+
+    if (role === "buyer") {
+      navigate("/buyer/need");
+    } else {
+      navigate("/seller");
+    }
+  };
 
   return (
     <div className="login-page">

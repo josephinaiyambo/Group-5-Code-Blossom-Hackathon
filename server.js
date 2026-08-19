@@ -1,5 +1,5 @@
 const express = require('express');
-const { initTables } = require('./db');
+const { initTables, pool } = require('./db');
 const cors = require("cors");
 const buyersRouter = require('./buyers');
 const demandsRouter = require('./demands');
@@ -17,8 +17,22 @@ app.get('/', (req, res) => {
   res.json({ status: 'ok', service: 'Person B — buyers, demands, transport-providers API (MySQL)' });
 });
 
-const PORT = process.env.PORT || 4000;
+app.get('/products', async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT id, name, category, unit
+      FROM products
+      ORDER BY name
+    `);
 
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
+const PORT = process.env.PERSON_B_PORT || 4000;
 initTables()
   .then(() => {
     app.listen(PORT, () => {

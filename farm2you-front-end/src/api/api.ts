@@ -28,7 +28,17 @@ export async function createBuyer(data: {
   return response.json();
 }
 
+export async function getProducts() {
+  const response = await fetch(
+    `${BUYER_API}/products`
+  );
 
+  if (!response.ok) {
+    throw new Error("Could not load products");
+  }
+
+  return response.json();
+}
 export async function getBuyer(id: number) {
   const response = await fetch(
     `${BUYER_API}/buyers/${id}`

@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {
+  createDemand,
+  runMatching,
+} from "../api/api";
+
 function BuyerNeed() {
   const navigate = useNavigate();
 
@@ -10,17 +15,63 @@ function BuyerNeed() {
   const [location, setLocation] = useState("");
   const [urgency, setUrgency] = useState("today");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (
+  e: React.FormEvent
+) => {
+  e.preventDefault();
 
-    const need = {
-      product,
-      quantity,
-      budget,
-      location,
-      urgency,
-    };
+  try {
+    const buyerId = Number(
+      localStorage.getItem("buyerId")
+    );
 
+    if (!buyerId) {
+      alert("Buyer profile not found.");
+      return;
+    }
+
+    const demand = await createDemand({
+      buyer_id: buyerId,
+      product_id: Number(product),
+      quantity_needed: Number(quantity),
+      budget_price: Number(budget),
+
+      frequency:
+        urgency === "week"
+          ? "weekly"
+          : "once",
+    });
+
+    localStorage.setItem(
+      "currentDemandId",
+      String(demand.id)
+    );
+
+    localStorage.setItem(
+      "currentBuyerNeed",
+      JSON.stringify({
+        product_id: Number(product),
+        quantity,
+        budget,
+        location,
+        urgency,
+      })
+    );
+
+    await runMatching();
+
+    navigate("/buyer/matches");
+
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      error instanceof Error
+        ? error.message
+        : "Could not find matches."
+    );
+  }
+};
     // Temporary while building UI
     localStorage.setItem(
       "currentBuyerNeed",

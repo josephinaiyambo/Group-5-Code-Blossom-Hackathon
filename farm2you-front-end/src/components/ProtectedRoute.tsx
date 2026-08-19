@@ -12,15 +12,13 @@ function ProtectedRoute({
 }: ProtectedRouteProps) {
   const userRole = localStorage.getItem("userRole");
 
-  // User has NOT logged in
   if (!userRole) {
     return <Navigate to="/login" replace />;
   }
 
-  // User is logged in but trying to access the wrong area
   if (userRole !== allowedRole) {
     if (userRole === "buyer") {
-      return <Navigate to="/marketplace" replace />;
+      return <Navigate to="/buyer/need" replace />;
     }
 
     if (userRole === "seller") {
