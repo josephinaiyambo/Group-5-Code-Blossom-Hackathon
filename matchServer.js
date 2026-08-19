@@ -51,7 +51,8 @@ app.get('/api/matches', async (req, res) => {
                 p.name AS producer_name, p.location AS producer_location,
                 l.quantity AS available_qty, l.price_per_unit AS seller_price,
                 b.name AS buyer_name, b.location AS buyer_location,
-                d.quantity AS demanded_qty, d.budget_per_unit AS buyer_budget,
+                d.quantity_needed AS demanded_qty,
+d.budget_price AS buyer_budget,
                 pr.name AS product_name
             FROM matches m
             JOIN listings l ON m.listing_id = l.id

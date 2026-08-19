@@ -14,13 +14,11 @@ function Login() {
     // Temporary demo authentication
     localStorage.setItem("userRole", role);
     localStorage.setItem("userEmail", email);
-
-    if (role === "buyer") {
-      navigate("/buyer");
-    } else {
-      navigate("/seller");
-    }
-  };
+if (role === "buyer") {
+  navigate("/buyer/need");
+} else {
+  navigate("/seller");
+};
 
   return (
     <div className="login-page">

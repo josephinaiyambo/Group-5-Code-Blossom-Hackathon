@@ -1,10 +1,8 @@
 const BUYER_API =
-  import.meta.env.VITE_BUYER_API_URL;
+  import.meta.env.VITE_PERSON_B_API_URL;
 
 const MATCH_API =
-  import.meta.env.VITE_MATCH_API_URL;
-
-
+  import.meta.env.VITE_MATCH_ENGINE_API_URL;
 
 
 export async function createBuyer(data: {
