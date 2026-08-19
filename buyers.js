@@ -4,7 +4,7 @@ const { pool } = require('./db');
 
 router.post('/', async (req, res) => {
   const { name, type, location, region, contact } = req.body;
-  const validTypes = ['restaurant', 'hotel', 'school', 'retailer', 'wholesaler'];
+  const validTypes = ['restaurant', 'hotel', 'school', 'retailer', 'shop', 'wholesaler', 'catering'];
 
   if (!name || !type || !location || !region || !contact) {
     return res.status(400).json({ error: 'name, type, location, region, and contact are all required' });

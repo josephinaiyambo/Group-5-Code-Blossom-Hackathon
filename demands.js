@@ -22,6 +22,9 @@ router.post('/', async (req, res) => {
     const [buyers] = await pool.query('SELECT id FROM buyers WHERE id = ?', [buyer_id]);
     if (buyers.length === 0) return res.status(404).json({ error: 'buyer_id does not match an existing buyer' });
 
+    const [products] = await pool.query('SELECT id FROM products WHERE id = ?', [product_id]);
+    if (products.length === 0) return res.status(404).json({ error: 'product_id does not match an existing product' });
+
     const [result] = await pool.query(
       `INSERT INTO demands (buyer_id, product_id, quantity_needed, budget_price, frequency, status)
        VALUES (?, ?, ?, ?, ?, 'open')`,
