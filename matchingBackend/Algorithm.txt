@@ -1,11 +1,13 @@
-
----
-
-### 10. `docs/algorithm.md`  
-```markdown
 # Matching Algorithm – Scoring Breakdown
 
-The match score is computed using seven weighted factors, all normalized to a total of **100 points**.
+The matching engine ranks potential farmer–buyer matches using six main
+factors worth a maximum of **100 base points**.
+
+A buyer with recurring demand may receive an additional **5-point bonus**.
+
+The final match score is always capped at **100%**.
+
+---
 
 ## Factors and Weights
 
@@ -14,20 +16,162 @@ The match score is computed using seven weighted factors, all normalized to a to
 | **Product Match** | 30 | Exact match = 30, partial match = 20, no match = 0. |
 | **Quantity Feasibility** | 20 | Buyer demand <= seller supply = 20; ≤1.5x supply = 15; ≤2.5x = 8; >2.5x = 2. |
 | **Price Alignment** | 20 | Seller price ≤ buyer budget = 20; ≤1.2x budget = 14; ≤1.5x = 7; >1.5x = 0. |
-| **Distance Score** | 15 | ≤50 km = 15; ≤150 = 12; ≤300 = 8; ≤500 = 4; >500 = 1. |
-| **Transport Cost** | 10 | ≤N$100 = 10; ≤300 = 7; ≤600 = 4; ≤1000 = 2; >1000 = 0. |
-| **Availability** | 5 | Default 5 points (all listings are active). |
-| **Recurring Demand** | 5 | Bonus if the buyer wants recurring orders. |
+| **Distance Score** | 15 | ≤50 km = 15; ≤150 km = 12; ≤300 km = 8; ≤500 km = 4; >500 km = 1. |
+| **Transport Cost** | 10 | ≤N$100 = 10; ≤N$300 = 7; ≤N$600 = 4; ≤N$1,000 = 2; >N$1,000 = 0. |
+| **Availability** | 5 | Active and currently available listings receive 5 points. |
 
-The final score is capped at **100**.
+Maximum base score:
+
+`30 + 20 + 20 + 15 + 10 + 5 = 100`
+
+---
+
+## Recurring Demand Bonus
+
+If the buyer needs the product on a recurring basis, the matching engine
+can add an additional **5 points**.
+
+For example:
+
+- `once` = no bonus
+- `weekly` = recurring-demand bonus
+- `monthly` = recurring-demand bonus
+
+Because the final score is capped at 100, a match can never exceed
+**100%**.
+
+Example:
+
+`Base Score = 97`
+
+`Recurring Bonus = 5`
+
+`97 + 5 = 102`
+
+Final displayed score:
+
+`100%`
+
+---
 
 ## Distance Calculation
-We use the **Haversine formula** to compute great-circle distances between Namibian towns based on latitude/longitude coordinates.
+
+The matching engine uses the **Haversine formula** to estimate the
+great-circle distance between the buyer and seller using latitude and
+longitude coordinates for supported Namibian towns.
+
+This allows the system to favor nearby suppliers when all other factors
+are similar.
+
+If a location cannot be identified by the matching engine, it should not
+receive the same distance advantage as a known nearby location.
+
+---
 
 ## Transport Cost Estimation
-`cost = distance (km) × 2.50 N$ × (weight in tonnes)`  
-with a minimum charge of N$50 and a cap of N$20,000.
+
+Estimated transport cost is calculated using:
+
+`cost = distance (km) × N$2.50 × weight in tonnes`
+
+The quantity is converted into tonnes before calculating the estimated
+transport cost.
+
+A minimum transport charge of:
+
+`N$50`
+
+is applied.
+
+The estimated transport cost is capped at:
+
+`N$20,000`
+
+This value is then used as one of the factors in the match score.
+
+---
 
 ## Price Difference
-`price_difference = seller_price - buyer_budget`  
-Negative means the seller is below budget (good). Positive means above budget (less attractive).
+
+Price difference is calculated as:
+
+`price_difference = seller_price - buyer_budget`
+
+### Negative value
+
+A negative result means the farmer's price is **below the buyer's maximum
+budget**.
+
+Example:
+
+`Seller price = N$25/kg`
+
+`Buyer budget = N$30/kg`
+
+`25 - 30 = -5`
+
+The seller is therefore:
+
+`N$5/kg below budget`
+
+This is generally a strong price match.
+
+### Zero
+
+A result of zero means:
+
+`Seller price = Buyer budget`
+
+The seller is exactly within the buyer's maximum price.
+
+### Positive value
+
+A positive result means the seller's asking price is **above the buyer's
+budget**.
+
+Example:
+
+`Seller price = N$35/kg`
+
+`Buyer budget = N$30/kg`
+
+`35 - 30 = 5`
+
+The seller is:
+
+`N$5/kg above budget`
+
+This match may still appear, but it receives a lower price-alignment
+score.
+
+---
+
+## Example Match
+
+A buyer in Windhoek requests:
+
+- Product: Tomatoes
+- Quantity: 100 kg
+- Maximum price: N$30/kg
+- Frequency: Once
+
+A farmer in Windhoek lists:
+
+- Product: Tomatoes
+- Quantity available: 120 kg
+- Price: N$25/kg
+- Available now
+
+The matching engine evaluates:
+
+1. Product compatibility
+2. Whether the farmer has enough quantity
+3. Whether the farmer's price fits the buyer's budget
+4. Distance between buyer and farmer
+5. Estimated transport cost
+6. Product availability
+
+The resulting score determines where that farmer appears in the buyer's
+ranked match results.
+
+Higher-scoring matches are shown before lower-scoring matches.

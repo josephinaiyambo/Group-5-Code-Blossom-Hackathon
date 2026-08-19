@@ -7,14 +7,32 @@ import {
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
+/* =========================
+   PUBLIC PAGES
+========================= */
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 
+
+/* =========================
+   BUYER PAGES
+========================= */
+
+import BuyerSetup from "./pages/BuyerSetup";
 import BuyerNeed from "./pages/BuyerNeed";
 import MatchResults from "./pages/MatchResults";
 
+
+/* =========================
+   SELLER PAGES
+========================= */
+
+import SellerSetup from "./pages/SellerSetup";
 import SellerDashboard from "./pages/SellerDashboard";
 import SellerMatches from "./pages/SellerMatches";
+
 
 function App() {
   return (
@@ -22,16 +40,18 @@ function App() {
 
       <NavBar />
 
+
       <Routes>
 
-        {/* =====================
+        {/* =================================
             PUBLIC
-        ===================== */}
+        ================================= */}
 
         <Route
           path="/"
           element={<Home />}
         />
+
 
         <Route
           path="/login"
@@ -39,9 +59,25 @@ function App() {
         />
 
 
-        {/* =====================
-            BUYER
-        ===================== */}
+
+        {/* =================================
+            BUYER SETUP
+        ================================= */}
+
+        <Route
+          path="/buyer/setup"
+          element={
+            <ProtectedRoute allowedRole="buyer">
+              <BuyerSetup />
+            </ProtectedRoute>
+          }
+        />
+
+
+
+        {/* =================================
+            BUYER — CREATE A NEED
+        ================================= */}
 
         <Route
           path="/buy"
@@ -52,6 +88,7 @@ function App() {
           }
         />
 
+
         <Route
           path="/buyer/need"
           element={
@@ -60,6 +97,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+
+
+        {/* =================================
+            BUYER — MATCH RESULTS
+        ================================= */}
 
         <Route
           path="/buyer/matches"
@@ -71,9 +114,25 @@ function App() {
         />
 
 
-        {/* =====================
-            SELLER
-        ===================== */}
+
+        {/* =================================
+            SELLER SETUP
+        ================================= */}
+
+        <Route
+          path="/seller/setup"
+          element={
+            <ProtectedRoute allowedRole="seller">
+              <SellerSetup />
+            </ProtectedRoute>
+          }
+        />
+
+
+
+        {/* =================================
+            SELLER — ADD PRODUCE
+        ================================= */}
 
         <Route
           path="/sell"
@@ -84,6 +143,7 @@ function App() {
           }
         />
 
+
         <Route
           path="/seller"
           element={
@@ -92,6 +152,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+
+
+        {/* =================================
+            SELLER — BUYER MATCHES
+        ================================= */}
 
         <Route
           path="/seller/matches"
@@ -107,5 +173,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

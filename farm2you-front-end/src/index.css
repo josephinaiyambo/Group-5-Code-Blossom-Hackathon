@@ -1503,3 +1503,549 @@ footer {
   }
 
 }
+/* =========================================================
+   NEW HOME PAGE - HOW IT WORKS
+========================================================= */
+
+.how-it-works {
+  max-width: 1200px;
+  margin: auto;
+  padding: 90px 70px;
+  background: #f7faef;
+}
+
+.how-it-works .section-heading {
+  max-width: 650px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.how-it-works .section-heading span {
+  display: block;
+  color: #6d7d69;
+  line-height: 1.7;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.step-card {
+  background: #ffffff;
+
+  padding: 35px;
+
+  border-radius: 16px;
+
+  border: 1px solid #dfe8d8;
+
+  transition: 0.25s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 40px
+    rgba(31, 71, 35, 0.08);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #e5efd9;
+  color: #326c39;
+
+  border-radius: 50%;
+
+  font-weight: 800;
+
+  margin-bottom: 25px;
+}
+
+.step-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  color: #173d1d;
+
+  font-size: 21px;
+
+  margin-bottom: 13px;
+}
+
+.step-card p {
+  color: #71806d;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   HOME PAGE - EXAMPLE MATCH
+========================================================= */
+
+.home-match-section {
+  max-width: 1060px;
+
+  margin: 90px auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  background: #ffffff;
+
+  border: 1px solid #dce6d5;
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px
+    rgba(31, 71, 35, 0.08);
+}
+
+.home-match-image {
+  min-height: 500px;
+}
+
+.home-match-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.home-match-content {
+  padding: 55px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-match-score {
+  width: fit-content;
+
+  background: #326c39;
+  color: #ffffff;
+
+  padding: 8px 15px;
+
+  border-radius: 25px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 18px;
+}
+
+.home-match-content h2 {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 44px;
+
+  color: #173d1d;
+
+  margin-bottom: 6px;
+}
+
+.home-match-content h3 {
+  color: #557052;
+
+  margin-bottom: 20px;
+}
+
+.home-match-content > p {
+  color: #70806d;
+
+  line-height: 1.8;
+
+  margin-bottom: 28px;
+}
+
+.home-match-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-bottom: 30px;
+}
+
+.home-match-stats div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 15px;
+
+  background: #f4f8ed;
+
+  border-radius: 8px;
+}
+
+.home-match-stats span {
+  color: #7b8877;
+
+  font-size: 10px;
+}
+
+.home-match-stats strong {
+  color: #2c6233;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   HERO MATCH BADGE
+========================================================= */
+
+.hero-image {
+  position: relative;
+}
+
+.hero-match-badge {
+  position: absolute;
+
+  left: 25px;
+  bottom: 25px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  padding: 15px 22px;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.15);
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.hero-match-badge strong {
+  color: #326c39;
+
+  font-size: 17px;
+}
+
+.hero-match-badge span {
+  color: #788574;
+
+  font-size: 12px;
+
+  margin-top: 3px;
+}
+
+
+/* =========================================================
+   LINKS THAT LOOK LIKE BUTTONS
+========================================================= */
+
+a.primary-button,
+a.secondary-button {
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   PROMO LINKS
+
+   Your old CSS targets:
+   .promo-text button
+
+   Our new Home page uses Link instead.
+========================================================= */
+
+.promo-text .primary-button {
+  align-self: flex-start;
+
+  margin-top: 22px;
+}
+
+.promo-text span {
+  color: #647660;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER - NEW 4 COLUMN VERSION
+========================================================= */
+
+footer {
+  grid-template-columns:
+    2fr 1fr 1fr 1fr;
+}
+
+footer .footer-column a {
+  display: block;
+
+  color: #d2e1ce;
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  margin-bottom: 9px;
+}
+
+footer .footer-column a:hover {
+  color: #ffffff;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   SELLER DASHBOARD HEADER
+========================================================= */
+
+.dashboard-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 30px;
+}
+
+.dashboard-heading > .primary-button {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SELLER LISTINGS HEADING
+========================================================= */
+
+.seller-products-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.seller-products-heading h2 {
+  margin-bottom: 0;
+}
+
+.seller-products-heading > div > p {
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  color: #65805f;
+
+  font-weight: bold;
+
+  margin-bottom: 6px;
+}
+
+.seller-products-heading > span {
+  color: #71806f;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SELLER LISTING INFORMATION
+========================================================= */
+
+.seller-product-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.seller-product-info .seller-name {
+  color: #4e8050;
+
+  font-size: 10px;
+
+  letter-spacing: 1.5px;
+
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   READ ONLY INPUTS
+========================================================= */
+
+.form-group input[readonly] {
+  background: #eef3e9;
+
+  color: #596b56;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DISABLED BUTTONS
+========================================================= */
+
+button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+.login-submit:disabled,
+.find-match-button:disabled {
+  transform: none;
+}
+
+
+/* =========================================================
+   ERROR / EMPTY MESSAGE IMPROVEMENTS
+========================================================= */
+
+.empty-products {
+  border-radius: 10px;
+}
+
+.empty-products p {
+  margin-top: 6px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works {
+    padding: 70px 35px;
+  }
+
+  .home-match-section {
+    margin: 60px 30px;
+
+    grid-template-columns: 1fr;
+  }
+
+  .home-match-image {
+    min-height: 350px;
+  }
+
+  .dashboard-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .dashboard-heading > .primary-button {
+    width: fit-content;
+  }
+
+  footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .how-it-works {
+    padding:
+      60px 20px;
+  }
+
+  .how-it-works .section-heading h2 {
+    font-size: 36px;
+  }
+
+  .step-card {
+    padding: 27px;
+  }
+
+  .home-match-section {
+    margin:
+      45px 20px;
+  }
+
+  .home-match-image {
+    min-height: 260px;
+  }
+
+  .home-match-content {
+    padding: 30px 25px;
+  }
+
+  .home-match-content h2 {
+    font-size: 34px;
+  }
+
+  .home-match-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .seller-products-heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+  }
+
+}
